@@ -1,0 +1,44 @@
+<h2>Survey test</h2>
+
+<h3>This is a test.</h3>
+Login app to see the survey results.
+<hr>
+<button type="button" class="btn btn-primary btn-lg" ng-click="takeSurvey()">Take the Survey</button>
+
+<!-- Modal -->
+<div class="modal fade" id="survey" tabindex="-1" role="dialog" aria-labelledby="survey" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Survey Test</h4>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <h3>What is your name?</h3>
+                    <input type="text" ng-model="newName" placeholder="Enter a name here">
+                </div>
+                <div>
+                    <h3>What is your age?</h3>
+                    <div class="radio">
+                        <input type="radio" ng-model="newAge" value="16-25">16-25<br/>
+                        <input type="radio" ng-model="newAge" value="26-35">26-35<br/>
+                        <input type="radio" ng-model="newAge" value="36-45">36-45<br/>
+                        <input type="radio" ng-model="newAge" value="46+">46+<br/>
+                    </div>
+                </div>
+                <div>
+                    <h3>Will you buy me a dinner?</h3>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary" ng-model="newDinner" btn-radio="'Yes'">YES</button>
+                        <button type="button" class="btn btn-primary" ng-model="newDinner" btn-radio="'No'">NO</button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" ng-click="addSurvey()">Send results</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

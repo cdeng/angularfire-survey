@@ -1,0 +1,19 @@
+
+<h2>Survey Result</h2>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Dinner?</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="result in results">
+            <td>{{result.name}}</td>
+            <td>{{result.age}}</td>
+            <td>{{result.dinner}}</td>
+        </tr>
+    </tbody>
+</table>
