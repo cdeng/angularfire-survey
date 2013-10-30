@@ -30,7 +30,7 @@ angular.module('myApp',
 
    // double-check that the app has been configured
    .run(['FBURL', function(FBURL) {
-      if( FBURL === 'https://INSTANCE.firebaseio.com' ) {
+      if( FBURL === 'https://ux-survey.firebaseio.com' ) {
          angular.element(document.body).html('<h1>Please configure app/js/config.js before running!</h1>');
       }
    }])
