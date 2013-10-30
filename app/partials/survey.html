@@ -1,11 +1,18 @@
-<h2>Survey test</h2>
+<!-- introduction and survey entrance -->
+<div class="col-md-4">
+    <h2>AngularFire Survey</h2>
+    <hr>
+    <ul>
+        <li>An open source online survey tool.</li>
+        <li>Based on AngularFire, AngularJS and Firebase.</li>
+        <li>Easy to set up without worrying about server code.</li>
+    </ul>
+    <hr>
+    <button type="button" class="btn btn-primary pull-right" ng-click="takeSurvey()">Take the Survey</button>
+    </div>
+</div>
 
-<h3>This is a test.</h3>
-Login app to see the survey results.
-<hr>
-<button type="button" class="btn btn-primary btn-lg" ng-click="takeSurvey()">Take the Survey</button>
-
-<!-- Modal -->
+<!-- survey detail modal -->
 <div class="modal fade" id="survey" tabindex="-1" role="dialog" aria-labelledby="survey" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -14,10 +21,12 @@ Login app to see the survey results.
                 <h4 class="modal-title">Survey Test</h4>
             </div>
             <div class="modal-body">
+                <!-- open question -->
                 <div>
                     <h3>What is your name?</h3>
                     <input type="text" ng-model="newName" placeholder="Enter a name here">
                 </div>
+                <!-- radio choice question -->
                 <div>
                     <h3>What is your age?</h3>
                     <div class="radio">
@@ -27,6 +36,7 @@ Login app to see the survey results.
                         <input type="radio" ng-model="newAge" value="46+">46+<br/>
                     </div>
                 </div>
+                <!-- toggle choice question -->
                 <div>
                     <h3>Will you buy me a dinner?</h3>
                     <div class="btn-group">

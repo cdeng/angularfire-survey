@@ -2,7 +2,7 @@
 <html lang="en" ng-app="myApp">
 <head>
   <meta charset="utf-8">
-  <title>Angular JS App</title>
+  <title>AngularFire Survey</title>
   <link rel="stylesheet" href="css/main.css"/>
   <link rel="stylesheet" href="//cdn.jsdelivr.net/bootstrap/3.0.0/css/bootstrap.min.css"/>
 </head>
@@ -18,16 +18,16 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Survey Test</a>
+                <a class="navbar-brand" href="#">AngularFire Survey</a>
             </div>
 
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="#/survey">Test</a></li>
+                    <li><a href="#/survey">Take the Survey</a></li>
                     <li ng-show="auth"><a href="#/result">Survey Result</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li ng-hide="auth"><a href="#/login">Login</a></li>
+                    <li ng-hide="auth" class="active"><a href="#/login">Login</a></li>
                     <li ng-show="auth"><a href ng-click="logout()">Logout</a></li>
                 </ul>
             </div><!-- /.navbar-collapse -->
@@ -39,7 +39,14 @@
         <div ng-view></div>
     </div>
 
+    <div class="navbar navbar-default navbar-fixed-bottom">
+        <div class="container">
+            <p class="text-muted credit">This is a <a href="http://github.com/cdeng/angularFire-survey" title="Github project" target="_blank">Github</a> Project.  {{ 'Current version is v%VERSION%.' | interpolate }}</p>
+        </div>
+    </div>
+
     <script src="http://static.firebase.com/v0/firebase.js"></script>
+    <script src="https://cdn.firebase.com/v0/firebase-simple-login.js"></script>
     <script src="//cdn.jsdelivr.net/jquery/2.0.3/jquery-2.0.3.min.js"></script>
     <script src="//cdn.jsdelivr.net/bootstrap/3.0.0/js/bootstrap.min.js"></script>
     <script src="lib/angular/angular.js"></script>
@@ -50,6 +57,5 @@
     <script src="js/controllers.js"></script>
     <script src="js/filters.js"></script>
     <script src="js/directives.js"></script>
-
 </body>
 </html>

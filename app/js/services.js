@@ -5,6 +5,9 @@
 
    angular.module('myApp.services', [])
 
+      // app version
+      .value('version', '0.2')
+
       .factory('loginService', ['angularFireAuth', 'profileCreator', '$location', '$rootScope',
          function(angularFireAuth, profileCreator, $location, $rootScope) {
             return {
