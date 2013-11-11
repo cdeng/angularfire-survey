@@ -8,7 +8,12 @@
         <li>Easy to set up without worrying about server code.</li>
     </ul>
     <hr>
-    <button type="button" class="btn btn-primary pull-right" ng-click="takeSurvey()">Take the Survey</button>
+    <button type="button" class="btn btn-primary pull-right" ng-click="takeSurvey()" ng-hide="successInfo">Take the Survey</button>
+    <!-- success information/alert -->
+    <div class="alert alert-success alert-dismissable" ng-show="successInfo">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <strong>Thank you for your feedback!</strong>.
+    </div>
     </div>
 </div>
 
@@ -52,6 +57,12 @@
                     </h3>
                     <div star-rating rating-value="rating" max="10" on-rating-selected="updateRating(rating)" readonly="false"></div>
                 </div>
+                <!-- textarea open question -->
+                <div>
+                    <h3>Comments/Suggestions (Optional)</h3>
+                    <textarea class="form-control" rows="2" ng-model="comment"></textarea>
+                </div>
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

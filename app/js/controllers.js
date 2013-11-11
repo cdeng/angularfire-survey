@@ -12,6 +12,10 @@ angular.module('myApp.controllers', ['ngRoute'])
         $scope.name = '';
         $scope.dinner = 'Yes';
         $scope.rating = 5;
+        $scope.comment = '';
+
+        // hide success information/alert
+        $scope.successInfo = false;
 
         // star rating question - update rating score
         $scope.updateRating = function(rating) {
@@ -27,16 +31,18 @@ angular.module('myApp.controllers', ['ngRoute'])
         var age = new Firebase(FBURL+'/survey').limit(10),
             name = new Firebase(FBURL+'/survey').limit(30),
             dinner = new Firebase(FBURL+'/survey').limit(5),
-            rating = new Firebase(FBURL+'/survey').limit(2);
+            rating = new Firebase(FBURL+'/survey').limit(2),
+            comment = new Firebase(FBURL+'/survey').limit(500);
 
         // add the array into $scope
-        $rootScope.results = angularFireCollection(age, name, dinner, rating);
+        $rootScope.results = angularFireCollection(age, name, dinner, rating, comment);
 
         // add new results to the list
         $scope.addSurvey = function() {
             if( $scope.age && $scope.name && $scope.dinner && $scope.rating ) {
-                $rootScope.results.add({age: $scope.age, name: $scope.name, dinner: $scope.dinner, rating: $scope.rating});
+                $rootScope.results.add({age: $scope.age, name: $scope.name, dinner: $scope.dinner, rating: $scope.rating, comment: $scope.comment});
                 $('#survey').modal('hide');
+                $scope.successInfo = true;
             } else {
                 alert('You missed something.');
             }
