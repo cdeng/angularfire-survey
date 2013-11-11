@@ -3,13 +3,13 @@
 
    /* Services */
 
-   angular.module('myApp.services', [])
+   angular.module('myApp.services', ['ngRoute'])
 
       // app version
-      .value('version', '0.2')
+      .value('version', '0.3')
 
-      .factory('loginService', ['angularFireAuth', 'profileCreator', '$location', '$rootScope',
-         function(angularFireAuth, profileCreator, $location, $rootScope) {
+      .factory('loginService', ['angularFireAuth', '$location', '$rootScope',
+         function(angularFireAuth, $location, $rootScope) {
             return {
                /**
                 * @param {string} email

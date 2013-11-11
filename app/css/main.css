@@ -3,3 +3,24 @@
 .container .credit {
     margin: 16px 0;
 }
+
+/* star rating */
+.rating{
+    color: #3276b1;
+    margin: 0;
+    padding: 0;
+}
+
+ul.rating {
+    display: inline-block;
+}
+
+.rating li {
+    list-style-type: none;
+    display: inline-block;
+    padding: 1px;
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 2em;
+}
