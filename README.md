@@ -19,4 +19,4 @@
 
 * Please configure Firebase URL in app/js/config.js before running.
 * [Set up Email/Password authentication in Firebase.](https://www.firebase.com/docs/security/simple-login-email-password.html)
-* Replace line 40 & 41 in app/js/controller.js with your own credentials you just set up.
+* Replace line 55 & 56 in app/js/controller.js with your own credentials you just set up.
