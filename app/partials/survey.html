@@ -1,73 +1,115 @@
-<!-- introduction and survey entrance -->
+
 <div class="col-md-4">
     <h2>AngularFire Survey</h2>
+    
     <hr>
+    
     <ul>
         <li>An open source online survey tool.</li>
-        <li>Based on AngularFire, AngularJS and Firebase.</li>
+        <li>Based on AngularFire, AngularJS, Bootstrap and Firebase.</li>
         <li>Easy to set up without worrying about server code.</li>
     </ul>
+    
     <hr>
+    
     <button type="button" class="btn btn-primary pull-right" ng-click="takeSurvey()" ng-hide="successInfo">Take the Survey</button>
+    
     <!-- success information/alert -->
     <div class="alert alert-success alert-dismissable" ng-show="successInfo">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
         <strong>Thank you for your feedback!</strong>.
     </div>
-    </div>
+    
 </div>
 
-<!-- survey detail modal -->
+<!-- survey detail modal dialog -->
 <div class="modal fade" id="survey" tabindex="-1" role="dialog" aria-labelledby="survey" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
+            
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Survey Test</h4>
+                <h4 class="modal-title">Survey Questions</h4>
             </div>
+            
             <div class="modal-body">
-                <!-- open question -->
-                <div>
-                    <h3>What is your name?</h3>
-                    <input type="text" ng-model="name" placeholder="Enter a name here">
+                
+                <!-- input box -->
+                <div class="form-group">
+                    <label>Name (Input Box)</label>
+                    <input type="text" class="form-control" name="name" ng-model="formData.name">
                 </div>
-                <!-- radio choice question -->
+                
+                <!--radio buttons -->
                 <div>
-                    <h3>What is your age?</h3>
-                    <div class="radio">
-                        <input type="radio" ng-model="age" value="16-25">16-25<br/>
-                        <input type="radio" ng-model="age" value="26-35">26-35<br/>
-                        <input type="radio" ng-model="age" value="36-45">36-45<br/>
-                        <input type="radio" ng-model="age" value="46+">46+<br/>
+                    <label>Your Age? (Radio Buttons)</label>
+                    <div class="form-group">
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="age" value="30-" ng-model="formData.age">
+                                Less than 30
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="age" value="30+" ng-model="formData.age">
+                                30 and above
+                            </label>
+                        </div>
                     </div>
                 </div>
-                <!-- toggle choice question -->
+                
+                <!-- multiSelect checkboxes -->
+                <label>Favorite Colors (MultiSelect Checkboxes)</label>
+                <div class="form-group">
+                    <label class="checkbox-inline">
+                        <input type="checkbox" name="favoriteColors" ng-model="formData.colors.red"> Red
+                    </label>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" name="favoriteColors" ng-model="formData.colors.blue"> Blue
+                    </label>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" name="favoriteColors" ng-model="formData.colors.green"> Green
+                    </label>
+                </div>                
+                
+                <!-- toggle choice -->
                 <div>
-                    <h3>Will you buy me a dinner?</h3>
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-primary" ng-model="dinner" btn-radio="'Yes'">YES</button>
-                        <button type="button" class="btn btn-primary" ng-model="dinner" btn-radio="'No'">NO</button>
+                    <label>Buy Me Lunch? (Toggle Choice)</label>
+                    <div class="form-group">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-primary" ng-model="formData.lunch" btn-radio=true>YES</button>
+                            <button type="button" class="btn btn-primary" ng-model="formData.lunch" btn-radio=false>NO</button>
+                        </div>
                     </div>
                 </div>
-                <!-- star rating question -->
+                
+                <!-- star rating -->
                 <div>
-                    <h3>
-                        How likely would you be to recommend this application to a friend or colleague?<br />
+                    <label>
+                        How likely would you be to recommend this application to a friend or colleague? (Star Rating)<br />
                         <small>(0 is not at all likely, 10 is extremely likely)</small>
-                    </h3>
-                    <div star-rating rating-value="rating" max="10" on-rating-selected="updateRating(rating)" readonly="false"></div>
+                    </label>
+                    <div class="form-group">
+                        <div star-rating rating-value="formData.rating" max="10" on-rating-selected="updateRating(rating)" readonly="false"></div>
+                    </div>
                 </div>
-                <!-- textarea open question -->
+                
+                <!-- textarea -->
                 <div>
-                    <h3>Comments/Suggestions (Optional)</h3>
-                    <textarea class="form-control" rows="2" ng-model="comment"></textarea>
+                    <label>Comments/Suggestions (Textarea)</label>
+                    <div class="form-group">
+                        <textarea class="form-control" rows="2" ng-model="formData.comment"></textarea>
+                    </div>
                 </div>
 
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" ng-click="addSurvey()">Send results</button>
+                <button type="button" class="btn btn-primary" id="addButton"
+                        data-loading-text="Sending..." ng-click="addSurvey()">Send results</button>
             </div>
+            
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->

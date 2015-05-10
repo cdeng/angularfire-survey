@@ -28,6 +28,18 @@ local.properties
 # PDT-specific
 .buildpath
 
+#################
+## NetBeans
+#################
+
+*.iml
+/nbproject
+
+#################
+## IntelliJ
+#################
+
+/.idea
 
 #################
 ## Visual Studio
@@ -213,5 +225,10 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
-/.idea
-*.iml
+
+
+#############
+## Firebase
+#############
+
+firebase.json
