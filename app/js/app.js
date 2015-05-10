@@ -1,12 +1,14 @@
 "use strict";
 
 // Declare app level module which depends on filters, and services
-angular.module("myApp",
-      ["ngRoute", "myApp.config", "myApp.filters", "myApp.services", "myApp.directives", "myApp.controllers", "firebase"]
-   )
+var app = angular.module("myApp", ["ngRoute", "myApp.config",
+    "myApp.filters", "myApp.services", "myApp.directives",
+    "myApp.controllers", "firebase"]
+   );
 
-    // configure views; note the authRequired parameter for authenticated pages
-    .config(["$routeProvider", function($routeProvider) {
+// configure views; note the authRequired parameter for authenticated pages
+app.config(["$routeProvider",
+    function($routeProvider) {
 
         $routeProvider.when("/survey", {
             templateUrl: "partials/survey.html",
@@ -19,18 +21,47 @@ angular.module("myApp",
         });
 
         $routeProvider.when("/result", {
-            authRequired: true,
             templateUrl: "partials/result.html",
-            controller: "resultCtrl"
+            controller: "resultCtrl",
+            resolve: {
+                // controller will not be loaded until $requireAuth resolves
+                "currentAuth": ["Auth", function(Auth) {
+                    // $requireAuth returns a promise so the resolve waits for it to complete
+                    return Auth.$requireAuth();
+                }]
+            }
         });
 
         $routeProvider.otherwise({redirectTo: "/survey"});
 
-    }]);
+    }
+]);
 
-   // double-check that the app has been configured
-   /*.run(["FBURL", function(FBURL) {
-      if( FBURL === "https://angularfire-survey.firebaseio.com/surveys" ) {
-         angular.element(document.body).html("<h1>Please configure app/js/config.js before running!</h1>");
-      }
-   }])*/
+// double-check that the app has been configured
+/*app.run(["FBURL", function(FBURL) {
+   if( FBURL === "https://angularfire-survey.firebaseio.com/surveys" ) {
+      angular.element(document.body).html("<h1>Please configure app/js/config.js before running!</h1>");
+   }
+}])*/
+
+// redirect the user back to the home page if auth error is catched
+app.run(["$rootScope", "$location", "Auth",
+    function($rootScope, $location, Auth) {
+
+        // any time auth status updates, add the user data to scope
+        Auth.$onAuth(function(authData) {
+          $rootScope.authData = authData;
+        });
+        
+        $rootScope.logout = function() {
+            Auth.$unauth();
+            $location.path("/survey");
+        };
+
+        $rootScope.$on("$routeChangeError", function(event, next, previous, error) {
+            if (error === "AUTH_REQUIRED") {
+                $location.path("/survey");
+            }
+        });
+    }
+]);

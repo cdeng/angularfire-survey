@@ -7,7 +7,7 @@
 
 ## Demo
 
-* http://users.wpi.edu/~cdeng/survey
+* https://angularfire-survey.firebaseapp.com/
 
 ## Resources
 

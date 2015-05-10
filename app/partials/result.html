@@ -4,19 +4,33 @@
 <table class="table table-hover">
     <thead>
         <tr>
+            <th>Time</th>
             <th>Name</th>
             <th>Age</th>
-            <th>Dinner?</th>
+            <th>Colors</th>
+            <th>Lunch?</th>
             <th>Rating</th>
             <th>Comment</th>
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="result in results">
+        <tr ng-repeat="result in results | orderBy: '-timestamp'">
+            <td>{{result.timestamp | date:"MM/dd/yyyy @ h:mma"}}</td>
             <td>{{result.name}}</td>
-            <td>{{result.age}}</td>
-            <td>{{result.dinner}}</td>
-            <td>{{result.rating}}</td>
+            <td>
+                <span ng-if = "result.age === '30-'">Less than 30</span>
+                <span ng-if = "result.age === '30+'">30 and above</span>
+            </td>
+            <td>
+                <span ng-if = "result.colors.red">Red</span>
+                <span ng-if = "result.colors.blue">Blue</span>
+                <span ng-if = "result.colors.green">Green</span>
+            </td>
+            <td>
+                <span ng-if = "result.lunch">Yes</span>
+                <span ng-if = "!result.lunch">No</span>
+            </td>
+            <td>{{result.rating}} Stars</td>
             <td>{{result.comment}}</td>
         </tr>
     </tbody>

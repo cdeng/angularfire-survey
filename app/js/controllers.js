@@ -12,40 +12,43 @@ app.controller("surveyCtrl", ["$scope", "$rootScope", "FBURL", "$firebaseArray",
         // create a synchronized array
         $scope.surveys = $firebaseArray(ref);
 
-        // default placeholders
-        $scope.age = "16-25";
-        $scope.name = "";
-        $scope.dinner = "Yes";
-        $scope.rating = 5;
-        $scope.comment = "";
-
         // hide success information/alert
         $scope.successInfo = false;
-
-        // star rating question - update rating score
-        $scope.updateRating = function(rating) {
-            $scope.rating = rating;
-        };
 
         // open modal
         $scope.takeSurvey = function () {
             $("#survey").modal("show");
         };
+        
+        // timestamp
+        $scope.timestamp = new Date().getTime();
 
-        // add the array into $scope
-        $rootScope.results = $firebaseArray(ref);
+        // store data in this object
+        // set default values
+        $scope.formData = {
+            "name": "Your Name",
+            "age": "30-",
+            "colors": {
+                "red": false,
+                "blue": true,
+                "green": false
+            },
+            "lunch": true,
+            "rating": 5,
+            "comment": "Thank you.",
+            "timestamp": $scope.timestamp
+        };
+        
+        // star rating question - update rating score
+        $scope.updateRating = function(rating) {
+            $scope.formData.rating = rating;
+        };
 
         // add new items to the array
         // and add it to Firebase
         $scope.addSurvey = function() {
-            if( $scope.age && $scope.name && $scope.dinner && $scope.rating ) {
-                $scope.surveys.$add({
-                    age: $scope.age,
-                    name: $scope.name,
-                    dinner: $scope.dinner,
-                    rating: $scope.rating,
-                    comment: $scope.comment
-                });
+            if($scope.formData) {
+                $scope.surveys.$add($scope.formData);
                 $("#survey").modal("hide");
                 $scope.successInfo = true;
             } else {
@@ -63,26 +66,24 @@ app.controller("loginCtrl", ["$scope", "$location", "FBURL", "$firebaseAuth",
         var ref = new Firebase(FBURL);
         $scope.authObj = $firebaseAuth(ref);
         
+        // Temporary email and password placeholder
+        $scope.email = "admin@mydomain.com";
+        $scope.password = "password";
+        
         $scope.login = function() {
             
             $scope.authData = null;
-            $scope.error = null;
-            
-            // Temporary email and password placeholder
-            $scope.email = "cdeng@wpi.edu";
-            $scope.pass = "testaccount";
+            $scope.error = null;            
             
             // Authentication using an email / password combination
             $scope.authObj.$authWithPassword({
                 email: $scope.email,
-                password: $scope.pass
+                password: $scope.password
             }).then(function(authData) {
                 $scope.authData = authData;
-                console.log("Logged in as:", authData.uid);
                 $location.path("/result");
             }).catch(function(error) {
                 $scope.error = error;
-                console.error("Authentication failed:", error);
             });
         };
 
@@ -90,18 +91,9 @@ app.controller("loginCtrl", ["$scope", "$location", "FBURL", "$firebaseAuth",
 ]);
 
 // result page controller
-app.controller("resultCtrl", ["$scope", "$rootScope", "FBURL", "$firebaseAuth", "$location",
-    function($scope, $rootScope, FBURL, $firebaseAuth, $location) {
-        
+app.controller("resultCtrl", ["$scope", "FBURL", "$firebaseArray",
+    function($scope, FBURL, $firebaseArray) {        
         var ref = new Firebase(FBURL);
-        $scope.authObj = $firebaseAuth(ref);
-
-//        angularFire(FBURL+"/users/"+$scope.auth.id, $scope, "user", {});
-
-        $rootScope.logout = function() {
-            $scope.authObj.$unauth();
-            $location.path("/survey");
-        };
-
+        $scope.results = $firebaseArray(ref);
     }
 ]);

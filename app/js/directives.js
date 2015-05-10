@@ -41,7 +41,7 @@ angular.module("myApp.directives", ["ngRoute"])
             restrict: "A",
             template: "<ul class='rating'>" +
                 "<li ng-repeat='star in stars' ng-click='toggle($index)'>" +
-                "<span class='glyphicon' ng-class='{\'glyphicon-star\': star.filled, \'glyphicon-star-empty\': !star.filled}'></span>" +
+                "<span class='glyphicon' ng-class='{\"glyphicon-star\": star.filled, \"glyphicon-star-empty\": !star.filled}'></span>" +
                 "</li>" +
                 "</ul>",
             scope: {

@@ -2,7 +2,14 @@
 
 /* Services */
 
-angular.module("myApp.services", ["ngRoute"])
+var app = angular.module("myApp.services", ["ngRoute"]);
 
-   // app version
-   .value("version", "1.0");
+// app version
+app.value("version", "1.0");
+
+app.factory("Auth", ["$firebaseAuth", "FBURL",
+  function($firebaseAuth, FBURL) {
+    var ref = new Firebase(FBURL);
+    return $firebaseAuth(ref);
+  }
+]);
