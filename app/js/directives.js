@@ -1,10 +1,16 @@
 "use strict";
 
-/* Directives */
-
-
+/**
+ * Directives module which defines directives for application.
+ * @module myApp/directives
+ */
 angular.module("myApp.directives", ["ngRoute"])
-    // btnRadio and rating directive from angular UI
+
+    /**
+     * btnRadio directive
+     * angular-ui/bootstrap/src/buttons
+     * @copyright Angular-UI team 2014
+     */
     .constant("buttonConfig", {
         activeClass: "active",
         toggleEvent: "click"
@@ -34,8 +40,12 @@ angular.module("myApp.directives", ["ngRoute"])
             }
         };
     }])
-    // star rating directive based on fundoo directive tutorial
-    // http://www.befundoo.com/university/tutorials/angularjs-directives-tutorial/
+
+    /**
+     * rating directive
+     * Fundoo-Solutions/angularjs-tutorials
+     * @copyright Fundoo Solutions 2014
+     */
     .directive("starRating", function () {
         return {
             restrict: "A",

@@ -1,30 +1,31 @@
 "use strict";
 
-/* Controllers */
+/**
+ * Controllers module which defines controllers.
+ * @module myApp/controllers
+ */
+var app = angular.module("myApp.controllers", ["ngRoute"]);
 
-var app = angular.module("myApp.controllers", ["ngRoute", "firebase"]);
-
-// survey page controller
-app.controller("surveyCtrl", ["$scope", "$rootScope", "FBURL", "$firebaseArray",
-    function($scope, $rootScope, FBURL, $firebaseArray) {
+// Survey controller
+app.controller("surveyCtrl", ["$scope", "FBURL", "$firebaseArray",
+    function($scope, FBURL, $firebaseArray) {
         
         var ref = new Firebase(FBURL);
         // create a synchronized array
         $scope.surveys = $firebaseArray(ref);
+        // timestamp
+        $scope.timestamp = new Date().getTime();
 
         // hide success information/alert
         $scope.successInfo = false;
 
-        // open modal
+        // open survey modal dialog
         $scope.takeSurvey = function () {
             $("#survey").modal("show");
         };
         
-        // timestamp
-        $scope.timestamp = new Date().getTime();
-
         // store data in this object
-        // set default values
+        // and set default values
         $scope.formData = {
             "name": "Your Name",
             "age": "30-",
@@ -39,61 +40,88 @@ app.controller("surveyCtrl", ["$scope", "$rootScope", "FBURL", "$firebaseArray",
             "timestamp": $scope.timestamp
         };
         
-        // star rating question - update rating score
+        /**
+         * Update rating score to object.
+         * @param {Number} rating - Star rating score.
+         */
         $scope.updateRating = function(rating) {
             $scope.formData.rating = rating;
         };
 
-        // add new items to the array
-        // and add it to Firebase
+        /**
+         * Add survey to Firebase database.
+         */
         $scope.addSurvey = function() {
-            if($scope.formData) {
-                $scope.surveys.$add($scope.formData);
-                $("#survey").modal("hide");
-                $scope.successInfo = true;
+            if($scope.formData.name) {
+                
+                // change button to loading state
+                var $btn = $("#addButton").button("loading");
+                
+                // push data to Firebase
+                $scope.surveys.$add($scope.formData).then(function() {
+                    // dismiss survey modal dialog
+                    $("#survey").modal("hide");
+                    // reset button loading state
+                    $btn.button("reset");
+                    // show success information/alert
+                    $scope.successInfo = true;
+                });
             } else {
-                alert("You missed something.");
+                alert("Please input the name.");
             }
         };
 
     }
 ]);
 
-// login page controller
-app.controller("loginCtrl", ["$scope", "$location", "FBURL", "$firebaseAuth",
-    function($scope, $location, FBURL, $firebaseAuth) {
-            
-        var ref = new Firebase(FBURL);
-        $scope.authObj = $firebaseAuth(ref);
+// Login controller
+app.controller("loginCtrl", ["$scope", "$location", "Auth",
+    function($scope, $location, Auth) {
         
-        // Temporary email and password placeholder
+        // temporary email and password placeholder
         $scope.email = "admin@mydomain.com";
         $scope.password = "password";
         
+        /**
+         * Login into app and redirect to result page
+         */
         $scope.login = function() {
             
             $scope.authData = null;
-            $scope.error = null;            
+            $scope.error = null;
             
-            // Authentication using an email / password combination
-            $scope.authObj.$authWithPassword({
+            // change button to loading state
+            var $btn = $("#loginButton").button("loading");
+            
+            // authentication using an email / password combination
+            Auth.$authWithPassword({
                 email: $scope.email,
                 password: $scope.password
             }).then(function(authData) {
+                // the data contains all auth info
                 $scope.authData = authData;
+                // redirect to result page after successful login
                 $location.path("/result");
+                // reset button loading state
+                $btn.button("reset");
             }).catch(function(error) {
+                // catch and display error if login fails
                 $scope.error = error;
+                // reset button loading state
+                $btn.button("reset");
             });
+            
         };
-
     }
 ]);
 
-// result page controller
+// Result controller
 app.controller("resultCtrl", ["$scope", "FBURL", "$firebaseArray",
-    function($scope, FBURL, $firebaseArray) {        
+    function($scope, FBURL, $firebaseArray) {
+        
         var ref = new Firebase(FBURL);
+        // download the data into local object
         $scope.results = $firebaseArray(ref);
+        
     }
 ]);

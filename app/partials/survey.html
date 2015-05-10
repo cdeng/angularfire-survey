@@ -1,30 +1,37 @@
-<!-- introduction and survey entrance -->
+
 <div class="col-md-4">
     <h2>AngularFire Survey</h2>
+    
     <hr>
+    
     <ul>
         <li>An open source online survey tool.</li>
-        <li>Based on AngularFire, AngularJS and Firebase.</li>
+        <li>Based on AngularFire, AngularJS, Bootstrap and Firebase.</li>
         <li>Easy to set up without worrying about server code.</li>
     </ul>
+    
     <hr>
+    
     <button type="button" class="btn btn-primary pull-right" ng-click="takeSurvey()" ng-hide="successInfo">Take the Survey</button>
+    
     <!-- success information/alert -->
     <div class="alert alert-success alert-dismissable" ng-show="successInfo">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
         <strong>Thank you for your feedback!</strong>.
     </div>
-    </div>
+    
 </div>
 
-<!-- survey detail modal -->
+<!-- survey detail modal dialog -->
 <div class="modal fade" id="survey" tabindex="-1" role="dialog" aria-labelledby="survey" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
+            
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Survey Test</h4>
+                <h4 class="modal-title">Survey Questions</h4>
             </div>
+            
             <div class="modal-body">
                 
                 <!-- input box -->
@@ -99,8 +106,10 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" ng-click="addSurvey()">Send results</button>
+                <button type="button" class="btn btn-primary" id="addButton"
+                        data-loading-text="Sending..." ng-click="addSurvey()">Send results</button>
             </div>
+            
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->

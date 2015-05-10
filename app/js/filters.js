@@ -1,16 +1,18 @@
 'use strict';
 
-/* Filters */
+/**
+ * Filters module which defines filters for application.
+ * @module myApp/filteres
+ */
+var app = angular.module('myApp.filters', ['ngRoute'])
 
-angular.module('myApp.filters', ['ngRoute'])
-   .filter('interpolate', ['version', function(version) {
-      return function(text) {
-         return String(text).replace(/\%VERSION\%/mg, version);
-      }
-   }])
-
-   .filter('reverse', function() {
-      return function(items) {
-         return items.slice().reverse();
-      };
-   });
+/**
+ * Interpolate app version.
+ * @param {String} version - App version defined in services.
+ */
+app.filter('interpolate', ['version', function(version) {
+        return function(text) {
+            return String(text).replace(/\%VERSION\%/mg, version);
+        };
+   }
+]);
