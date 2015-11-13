@@ -7,7 +7,7 @@
 var app = angular.module("myApp.services", ["ngRoute", "firebase"]);
 
 // define app version
-app.value("version", "1.0.0");
+app.value("version", "1.0.1");
 
 // re-usable factory that generates the $firebaseAuth instance
 app.factory("Auth", ["$firebaseAuth", "FBURL",

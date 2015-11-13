@@ -30,8 +30,8 @@
 
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="#/survey">Take the Survey</a></li>
-                    <li ng-show="authData"><a href="#/result">Survey Result</a></li>
+                    <li ng-class="{active: isActive('/survey')}"><a href="#/survey">Take the Survey</a></li>
+                    <li ng-class="{active: isActive('/result')}" ng-show="authData"><a href="#/result">Survey Result</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li ng-hide="authData" class="active"><a href="#/login">Login</a></li>
