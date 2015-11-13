@@ -77,9 +77,13 @@
                 <div>
                     <label>Buy Me Lunch? (Toggle Choice)</label>
                     <div class="form-group">
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-primary" ng-model="formData.lunch" btn-radio=true>YES</button>
-                            <button type="button" class="btn btn-primary" ng-model="formData.lunch" btn-radio=false>NO</button>
+                        <div class="btn-group" data-toggle="buttons">
+                            <label class="btn btn-primary">
+                                <input type="radio" name="lunch" value="YES" ng-model="formData.lunch">YES
+                            </label>
+                            <label class="btn btn-primary">
+                                <input type="radio" name="lunch" value="NO" ng-model="formData.lunch">NO
+                            </label>
                         </div>
                     </div>
                 </div>
