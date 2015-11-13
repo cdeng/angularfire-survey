@@ -42,7 +42,7 @@ app.config(["$routeProvider",
 
 // double-check whether the app has been configured
 app.run(["FBURL", function(FBURL) {
-   if( FBURL !== "https://angularfire-survey.firebaseio.com/surveys" ) {
+   if( FBURL === "https://angularfire-survey.firebaseio.com/surveys" ) {
       angular.element(document.body).html("<h1>Please configure app/js/config.js before running!</h1>");
    }
 }]);
