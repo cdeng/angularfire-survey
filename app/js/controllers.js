@@ -4,13 +4,12 @@
  * Controllers module which defines controllers.
  * @module myApp/controllers
  */
-var app = angular.module("myApp.controllers", ["ngRoute"]);
+var app = angular.module("myApp.controllers", []);
 
 // Survey controller
-app.controller("surveyCtrl", ["$scope", "FBURL", "$firebaseArray",
-    function($scope, FBURL, $firebaseArray) {
+app.controller("surveyCtrl", function($scope, $firebaseArray) {
         
-        var ref = new Firebase(FBURL);
+        var ref = firebase.database().ref();
         // create a synchronized array
         $scope.surveys = $firebaseArray(ref);
         // timestamp
@@ -72,11 +71,10 @@ app.controller("surveyCtrl", ["$scope", "FBURL", "$firebaseArray",
         };
 
     }
-]);
+);
 
 // Login controller
-app.controller("loginCtrl", ["$scope", "$location", "Auth",
-    function($scope, $location, Auth) {
+app.controller("loginCtrl", function($scope, $location, Auth) {
         
         // temporary email and password placeholder
         $scope.email = "admin@mydomain.com";
@@ -94,10 +92,10 @@ app.controller("loginCtrl", ["$scope", "$location", "Auth",
             var $btn = $("#loginButton").button("loading");
             
             // authentication using an email / password combination
-            Auth.$authWithPassword({
-                email: $scope.email,
-                password: $scope.password
-            }).then(function(authData) {
+            Auth.$signInWithEmailAndPassword(
+                $scope.email,
+                $scope.password
+            ).then(function(authData) {
                 // the data contains all auth info
                 $scope.authData = authData;
                 // redirect to result page after successful login
@@ -113,15 +111,14 @@ app.controller("loginCtrl", ["$scope", "$location", "Auth",
             
         };
     }
-]);
+);
 
 // Result controller
-app.controller("resultCtrl", ["$scope", "FBURL", "$firebaseArray",
-    function($scope, FBURL, $firebaseArray) {
+app.controller("resultCtrl", function($scope, $firebaseArray) {
         
-        var ref = new Firebase(FBURL);
+        var ref = firebase.database().ref();
         // download the data into local object
         $scope.results = $firebaseArray(ref);
         
     }
-]);
+);

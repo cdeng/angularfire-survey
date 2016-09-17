@@ -1,3 +1,19 @@
+## 1.1.0 (Sept 16, 2016)
+
+Migration:
+
+  - Migrated AngularFire from 1.x.x to 2.x.x
+  - Migrated Firebase from 2.x.x to 3.x.x
+  - Migrated Firebase database from Firebase.com to new Firebase console
+
+Upgrades:
+
+  - Upgraded AngularFire to 2.0.2
+  - Upgraded Firebase to 3.4.0
+  - Upgraded AngularJS to 1.5.8
+  - Upgraded Bootstrap to 3.3.7
+  - Upgraded jQuery to 3.1.0
+
 ## 1.0.1 (Nov 12, 2015)
 
 Features:

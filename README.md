@@ -12,10 +12,11 @@
 
 ## Dependencies
 
-* [AngularFire 1.1.1](http://angularfire.com)
-* [AngularJS 1.3.15](http://angularjs.org/)
-* [Bootstrap 3.3.4] (http://getbootstrap.com/)
-* [Firebase 2.2.4](http://firebase.com)
+* [AngularFire 2.0.2](https://github.com/firebase/angularfire)
+* [Google AngularJS 1.5.8](https://angularjs.org/)
+* [Google Firebase 3.4.0](https://firebase.google.com)
+* [Bootstrap 3.3.7](http://getbootstrap.com/)
+* [JQuery 3.1.0](https://jquery.com/)
 
 ## Configuration
 
@@ -23,17 +24,22 @@
 
 ```javascript
 // your Firebase URL goes here
-app.constant("FBURL", "https://angularfire-survey.firebaseio.com/surveys");
+var config = {
+    apiKey: "AIzaSyAVCmE0CaAntEeB7p3Up9L990FGHnO11_E",
+    authDomain: "angularfire-survey.firebaseapp.com",
+    databaseURL: "https://angularfire-survey.firebaseio.com",
+    storageBucket: "angularfire-survey.appspot.com",
+    messagingSenderId: "204946184892"
+};
 ```
 
 * Set up Email/Password authentication in Firebase.
 
-    - Log in to Firebase and go to **Manage App**
-    - Click on **Login & Auth** in the left panel
-    - Select **Email & Password** tab and **"Enable Email & Password Authentication"**
-    - Add email and password to **Registered Users** list on the bottom of this page
+    - Log in to [Firebase console](https://firebase.google.com/console/),  open the **Auth** section
+    - On the **Sign in method** tab, enable the **Email/password** sign-in method and click **Save**.
+    - Add email and password to **Users** tab
 
-* Replace line 78 & 79 in app/js/controller.js with your own credentials you just set up.
+* Replace line 80 & 81 in app/js/controller.js with your own credentials you just set up.
 
 ```javascript
 $scope.email = "admin@mydomain.com";
